@@ -1,0 +1,81 @@
+type Person{
+	id: ID
+	name: String!
+	city: String!
+}
+
+type Review{
+	id: ID
+	rating: String
+	body: String
+	created_date: String
+	by: String
+}
+
+type Restaurants{
+	id: ID
+	name: String
+	city: String
+	cuisine: [String]
+}
+
+type Friend{
+	iD: ID
+	name: String
+	city: String!
+}
+
+input ReviewInput{
+	text: String
+	rating: Int
+}
+
+type Restaurant{
+	name: String
+	city: String
+	cuisine: String
+	review: Review
+	id: String
+}
+
+type Mutation{
+	addPerson(
+		personId: String
+		id: String
+	): String
+	addService(
+		personId: String
+		rastaurantId: String
+		reviewInput: ReviewInput
+	): String
+	rateIt(
+		personId: String
+		id: String
+		likes: Boolean
+	): String
+}
+
+type Query{
+	getPeople(
+		personId: String
+	): [Person]
+	getAllFriend(
+		personId: String
+	): [Friend]
+	getRestaurantsDetail(
+		id: String
+	): Restaurant
+	getAllRestaurants(
+		personId: String
+	): [Restaurants]
+	getRestaurantsSuggestion(
+		personId: String
+	): [Restaurants]
+	getFrientSuggestion(
+		personId: String
+	): [Friend]
+}
+schema{
+	query: Query,
+	mutation: Mutation
+}
